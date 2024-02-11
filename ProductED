@@ -1,0 +1,99 @@
+package poo;
+
+
+
+import java.util.Date;
+import java.util.Scanner;
+
+class Producto {
+    int idProducto;
+    String nombre;
+    int cantidad;
+    double precio;
+
+    // Constructor
+    public Producto(int idProducto, String nombre, int cantidad, double precio) {
+        this.idProducto = idProducto;
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+        this.precio = precio;
+    }
+}
+
+class Compra {
+    int idCompra;
+    int idProducto;
+    Date fechaCompra;
+    int cantidad;
+    double precio;
+    double total;
+
+    // Constructor
+    public Compra(int idCompra, int idProducto, Date fechaCompra, int cantidad, double precio) {
+        this.idCompra = idCompra;
+        this.idProducto = idProducto;
+        this.fechaCompra = fechaCompra;
+        this.cantidad = cantidad;
+        this.precio = precio;
+        this.total = calcularTotal();
+    }
+
+    // Método para calcular el total
+    private double calcularTotal() {
+        return cantidad * precio;
+    }
+}
+
+public class ProductED {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Ingresar datos del producto
+        System.out.println("Ingrese datos del producto:");
+        System.out.print("ID del producto: ");
+        int idProducto = scanner.nextInt();
+        scanner.nextLine();  // Consumir el salto de línea
+        System.out.print("Nombre del producto: ");
+        String nombreProducto = scanner.nextLine();
+        System.out.print("Cantidad: ");
+        int cantidadProducto = scanner.nextInt();
+        System.out.print("Precio: ");
+        double precioProducto = scanner.nextDouble();
+
+        // Crear objeto Producto
+        Producto producto = new Producto(idProducto, nombreProducto, cantidadProducto, precioProducto);
+
+        // Mostrar información del producto
+        System.out.println("\nInformación del producto:");
+        System.out.println("ID: " + producto.idProducto);
+        System.out.println("Nombre: " + producto.nombre);
+        System.out.println("Cantidad: " + producto.cantidad);
+        System.out.println("Precio: $" + producto.precio);
+
+        // Ingresar datos de la compra
+        System.out.println("\nIngrese datos de la compra:");
+        System.out.print("ID de la compra: ");
+        int idCompra = scanner.nextInt();
+        System.out.print("Fecha de la compra (YYYMMDD): ");
+        long fechaCompraMillis = scanner.nextLong();
+        Date fechaCompra = new Date(fechaCompraMillis);
+        System.out.print("Cantidad comprada: ");
+        int cantidadCompra = scanner.nextInt();
+        System.out.print("Precio de compra: ");
+        double precioCompra = scanner.nextDouble();
+
+        // Crear objeto Compra
+        Compra compra = new Compra(idCompra, idProducto, fechaCompra, cantidadCompra, precioCompra);
+
+        // Mostrar información de la compra
+        System.out.println("\nInformación de la compra:");
+        System.out.println("ID de la compra: " + compra.idCompra);
+        System.out.println("ID del producto: " + compra.idProducto);
+        System.out.println("Fecha de la compra: " + compra.fechaCompra);
+        System.out.println("Cantidad comprada: " + compra.cantidad);
+        System.out.println("Precio de compra: $" + compra.precio);
+        System.out.println("Total: $" + compra.total);
+
+        scanner.close();
+    }
+}
